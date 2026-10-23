@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>30 días para mi bebé 💜</title>
+<style>
+:root{--lav:#eadcff;--lav2:#d7bcff;--purple:#8054c7;--deep:#44236d;--ink:#35234a;--pink:#f7d8f0;--white:#fffaff}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);background:linear-gradient(135deg,#f8f0ff,#e7d8ff 48%,#fce8f7);overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(2px);opacity:.55;animation:float 12s ease-in-out infinite alternate}
+body:before{width:280px;height:140px;background:#fff;left:-70px;top:14%;box-shadow:35px 20px 0 8px #fff,75px 3px 0 0 #fff}
+body:after{width:250px;height:120px;background:#fff;right:-60px;top:62%;box-shadow:-40px 20px 0 8px #fff,-85px 5px 0 0 #fff;animation-delay:-5s}
+@keyframes float{to{transform:translate(35px,-20px)}}
+header{text-align:center;padding:34px 18px 18px}
+.moon{font-size:2rem;animation:twinkle 2s infinite alternate}
+@keyframes twinkle{to{transform:rotate(12deg) scale(1.1)}}
+h1{font-family:Georgia,serif;color:#653ca1;font-size:clamp(2rem,6vw,3.4rem);margin:7px 0 8px;text-shadow:0 2px 0 white}
+.subtitle{margin:0 auto;max-width:540px;line-height:1.6;color:#765e94}
+.pill{display:inline-block;margin-top:15px;background:#fff9;border:1px solid #fff;padding:7px 14px;border-radius:99px;color:#7046a8;font-size:.9rem}
+main{width:min(980px,94%);margin:0 auto 50px}
+.panel{background:#ffffffb8;backdrop-filter:blur(10px);border:1px solid #fff;border-radius:24px;padding:clamp(16px,3vw,28px);box-shadow:0 15px 45px #8054c71a}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+h2{margin:0;color:#633c99;font-size:1.25rem}
+.small{font-size:.9rem;color:#806b98}
+.levels{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.level{border:1px solid #ddc9fa;border-radius:17px;background:linear-gradient(160deg,#fff,#f3eaff);min-height:105px;padding:12px 5px;cursor:pointer;color:#6d48a3;transition:.18s;box-shadow:0 5px 0 #d7c2f3}
+.level:hover{transform:translateY(-3px);box-shadow:0 8px 0 #d7c2f3}
+.level .heart{font-size:1.25rem;display:block}
+.level strong{display:block;font-size:.96rem;margin:4px 0}
+.level small{font-size:.72rem;color:#987fba}
+.level.done{background:linear-gradient(160deg,#fce7f6,#eadcff);border-color:#c89bea}
+.level.done small{color:#9a4e94}
+footer{text-align:center;color:#846b9c;padding:22px;font-size:.86rem}
+button,input{font:inherit}
+.btn{border:0;border-radius:13px;background:linear-gradient(135deg,#9a70dc,#7c4fbe);color:white;padding:11px 17px;cursor:pointer;font-weight:650;box-shadow:0 5px 12px #8054c733}
+.btn.secondary{background:#f1e7ff;color:#7045a6;box-shadow:none;border:1px solid #dfccf7}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.modal{position:fixed;inset:0;background:#28163cb3;display:none;align-items:center;justify-content:center;padding:16px;z-index:10}
+.modal.show{display:flex}
+.dialog{width:min(570px,100%);max-height:92vh;overflow:auto;background:#fffaff;border:1px solid white;border-radius:25px;padding:24px;box-shadow:0 25px 80px #25113d66}
+.dialog h2{font-family:Georgia,serif;font-size:1.7rem;margin:0 0 7px}
+.dialog p{line-height:1.55;color:#765e91}
+.field{display:flex;gap:8px;margin:14px 0}
+input{width:100%;min-width:0;border:1px solid #d6c0f0;border-radius:12px;padding:12px 13px;background:white;color:#3e2a55;outline-color:#a57cdd}
+.error{color:#b3337d;min-height:1.3em;font-size:.9rem}
+.gamearea{background:#f3eaff;border-radius:18px;padding:14px;margin-top:14px}
+.maze{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:3px;width:min(100%,360px);margin:12px auto;touch-action:manipulation}
+.cell{aspect-ratio:1;min-width:0;border-radius:4px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:clamp(.55rem,2.8vw,1.15rem);overflow:hidden}
+.cell.wall{background:#9671c7}
+.cell.player{background:#f9d7f0}
+.cell.exit{background:#d8f5df}.cell.path{background:#fffaff}.maze-help{text-align:center;font-size:.85rem;color:#806b98}.maze .cell.wall{background:#9671c7;box-shadow:inset 0 0 0 1px #815bb1}
+.controls{display:grid;grid-template-columns:repeat(3,48px);justify-content:center;gap:5px;margin:12px auto}
+.controls button{height:42px;border:0;border-radius:10px;background:#d9c3f7;color:#53327e;font-size:1.1rem;cursor:pointer}
+.controls .empty{visibility:hidden}
+.reward{background:linear-gradient(135deg,#fce6f6,#eadfff);border:1px dashed #bd91e9;border-radius:16px;padding:18px;text-align:center;margin-top:15px}
+.reward strong{display:block;font-size:1.1rem;color:#6d3ca1}
+.hint{font-size:.82rem;color:#927da7}
+@media(max-width:600px){.levels{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.level{min-height:95px}.section-head{align-items:flex-start}.field{flex-direction:column}.dialog{padding:19px}}
+
+.stagebar{display:flex;justify-content:space-between;align-items:center;gap:8px;color:#8a63b4;font-size:.78rem;font-weight:800;letter-spacing:.08em;margin-bottom:12px}
+.challenge-prompt{line-height:1.65;white-space:pre-line}
+.challenge-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:14px 0}
+.challenge-option{background:#fffaff;border:2px solid #d9c5f3;border-radius:13px;padding:12px;color:#50336e;font-weight:700;cursor:pointer;min-height:48px}
+.challenge-option.selected{background:#eadcff;border-color:#8054c7;box-shadow:0 0 0 2px #8054c733}
+.challenge-option:hover{transform:translateY(-1px)}
+.challenge-input{width:100%;padding:13px;border:2px solid #d9c5f3;border-radius:12px;background:#fffaff;color:#35234a;font-size:1rem;margin:8px 0 14px}
+.challenge-feedback{min-height:24px}
+@media(max-width:440px){.challenge-options{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="moon">☾ ✦ 💜 ✦ ☽</div>
+  <h1>30 días para mi bebé</h1>
+  <p class="subtitle">Treinta pequeños desafíos, treinta laberintos y un montón de amor esperándote al final. ¿Te animás a descubrirlos?</p>
+  <span class="pill">♡ una aventura hecha especialmente para vos ♡</span>
+  <div style="margin:16px auto 0;max-width:460px;color:#7b5c9f;font-size:.92rem">✦ Cada nivel revela un sello. Los 30 sellos abren el <strong>Archivo Secreto de Nosotros</strong>. ✦</div>
+</header>
+<main>
+<section class="panel">
+  <div class="section-head">
+    <div><h2>Tu aventura secreta</h2><div class="small">Elegí un nivel e ingresá la contraseña que recibiste.</div></div>
+    <div class="small" id="progress">💜 0 de 30 completados</div>
+  </div>
+  <div class="levels" id="levels"></div>
+</section>
+<div class="reward" id="finalReward" style="display:none;margin-top:18px">
+  <div style="font-size:2.4rem">✧ 🔮 ✧</div><strong>La Constelación de Nosotros</strong>
+  <p>Treinta pruebas quedaron atrás. Ahora las estrellas forman una constelación que guarda nuestro último secreto.</p>
+  <button class="btn" id="openFinalVault">Unir las estrellas y descubrirlo ✨</button>
+  <div id="finalVaultPuzzle" style="display:none;margin-top:15px">
+    <p><strong>Último acertijo</strong><br>“No se puede guardar en una caja, pero puede acompañarte a todas partes. No se compra, no se toca y crece cuando se comparte. ¿Qué es?”</p>
+    <div class="field"><input id="finalAnswer" placeholder="Tu respuesta secreta…" autocomplete="off"><button class="btn" id="checkFinalAnswer">Resolver</button></div>
+    <div class="error" id="finalError"></div>
+  </div>
+  <div id="finalVaultPrize" style="display:none;margin-top:15px">
+    <div style="font-size:2.4rem">💌✨💜</div>
+    <strong>¡¡La constelación se encendió, mi bebé!</strong>
+    <p>Tu recompensa no es un objeto dentro de un cofre: es un vale especial para vivir un momento juntos. Canjeable por una cita sorpresa elegida por mí, muchos besitos y una carta que te voy a dar en persona.</p>
+    <p id="finalMessage">mi amor mi vida mi bebé hermosa 💗😭<br><br>bueno ebbe no sé ni por dónde empezar esta carta JAJAJAJA pero quiero que sepas que te amo muchísimo y que por más que te lo diga mil veces siento que nunca voy a terminar de demostrarte todo lo que siento por vos<br><br>primero quiero que sepas que sé que a veces soy medio boludo JAJAJAJA y me enojo por boludeces o me hago la cabeza por cosas que capaz ni son tan importantes 😭💗 sé que tengo cosas que mejorar y quiero hacerlo porque te amo y quiero que estemos bien juntos quiero que podamos hablar las cosas entendernos y seguir aprendiendo uno del otro porque sos demasiado importante para mí<br><br>y ahora sí amor basta de hablar de eso porque quiero decirte lo muchísimo que te amo 😭💗 posta ebbe sos una de las personitas más lindas que me dio la vida me hacés feliz con un mensajito con una boludez que me decís o simplemente con estar conmigo me encanta escucharte mirarte hacerte reír y compartir mi tiempo con vos<br><br>no sabés cuánto te extraño cuando no estamos juntos porque es increíble que podamos pasar ocho horas juntos y para mí sean quince minutos JAJAJAJAJA 😭💗 cuando llega el momento de despedirnos siempre me quedo con ganas de otro abrazo otro besito y un ratito más con vos porque nunca parece suficiente el tiempo que paso con mi bebé hermosa<br><br>me encanta tu forma de ser tus ocurrencias tus risas y hasta cuando me corregís porque soy un boludo JAJAJAJA te amo por ser vos misma y quiero que siempre puedas sentirte cómoda conmigo que puedas contarme tus cosas y que juntos podamos vivir un montón de momentos hermosos<br><br>quiero seguir haciendo recuerdos con vos salir juntos sacarnos fotos horribles reírnos por cualquier boludez y escribirte cartitas como esta aunque termine haciendo una biblia JAJAJAJA quiero acompañarte en tus días lindos y en los difíciles y que podamos seguir construyendo algo hermoso entre los dos<br><br>gracias por estar en mi vida por hacerme tan feliz y por cada momento que compartimos amor a veces pienso en todo lo que tuvimos que esperar para poder vernos como queríamos y me pone muy feliz tenerte conmigo porque cada abrazo tuyo hace que valga la pena toda esa espera 💗<br><br>y también quiero que sepas que sos hermosa tal y como sos mi vida no tenés que cambiar nada para que te ame porque me enamoré de vos de tu forma de ser y de todas esas pequeñas cosas que te hacen ser mi bebé hermosa</p>
+  </div>
+</div>
+</main>
+<footer>hecho con amor, un nivel a la vez 💜</footer>
+
+<div class="modal" id="modal">
+ <div class="dialog">
+   <div style="display:flex;justify-content:space-between;align-items:start;gap:10px">
+    <div><div style="color:#a07bc7;font-size:.9rem">TU DESAFÍO SECRETO</div><h2 id="modalTitle">Nivel 1 💜</h2></div>
+    <button class="btn secondary" id="close" aria-label="Cerrar">✕</button>
+   </div>
+   <p id="modalIntro">Primero, ingresá la contraseña que te dieron. Después, encontrá el camino hasta la salida.</p>
+   <div id="passwordPane">
+    <label for="password"><strong>Contraseña del nivel</strong></label>
+    <div class="field"><input id="password" type="password" placeholder="Escribí la contraseña…" autocomplete="off"><button class="btn" id="enter">Entrar</button></div>
+    <div class="error" id="error"></div>
+   </div>
+   <div class="gamearea" id="gamePane" style="display:none">
+    <div class="stagebar"><span id="stageLabel">PRUEBA 1 DE 3</span><span id="stageDots">♡ ♡ ♡</span></div>
+    <h3 id="challengeTitle">Desafío</h3>
+    <p id="challengePrompt" class="challenge-prompt"></p>
+    <div id="challengeBody"></div>
+    <div id="challengeFeedback" class="error" aria-live="polite"></div>
+    <button class="btn" id="challengeSubmit">Comprobar respuesta</button>
+   </div>
+   <div id="levelReward" class="reward" style="display:none">
+    <div style="font-size:2rem">✦ 🗝️ ✦</div><strong id="rewardTitle">¡Sello mágico conseguido!</strong>
+    <p id="rewardText">Ganaste un vale secreto.</p>
+    <p class="hint">Guardá este sello: cada desafío superado te acerca al Archivo Secreto de Nosotros.</p>
+    <button class="btn" id="backToLevels">Volver a los niveles</button>
+   </div>
+   <p class="hint">Las contraseñas de esta maqueta se pueden personalizar en el archivo del juego.</p>
+ </div>
+</div>
+<script>
+// PERSONALIZÁ ACÁ: cambiá estas 30 contraseñas por las que quieras darle día a día.
+const passwords = [
+  "Luna7Qm4", "Nube9Xk2", "Rosa5Vp8", "Mimo3Za6", "Cielo8Rt1",
+  "Flor4Ny7", "Dulce6Bw9", "Lila2Kp5", "Amor9Hs3", "Sol7Jc4",
+  "Nube5Fd8", "Luna3Wx6", "Mimo8Gv2", "Rosa4Qn7", "Flor9Tb1",
+  "Cielo6Mp3", "Amor2Zk8", "Dulce7Yr5", "Sol4Hx9", "Lila8Cn2",
+  "Rosa3Jw6", "Mimo9Pf4", "Nube2Ks7", "Flor5Vx1", "Luna8Db3",
+  "Amor6Qt9", "Cielo4Nz2", "Sol9Wr5", "Dulce3Gm7", "Lila5Yh8"
+];
+// Cada nivel tiene un reto y un vale distinto. Podés editar los textos para que sean más personales.
+const levelInfo = [
+["La puerta de los símbolos","Ordená los símbolos para encontrar la llave.","Vale por un abrazo largo 💜"],
+["Memoria de luciérnagas","Memorizá la secuencia de luces y repetila.","Vale por elegir la próxima película 🎬"],
+["El mensaje revuelto","Ordená las letras para descubrir la palabra secreta.","Vale por una merienda juntos 🍓"],
+["La llave escondida","Encontrá la llave entre los objetos de la habitación.","Vale por diez besitos 💋"],
+["El código de colores","Repetí la secuencia de colores sin equivocarte.","Vale por una cita elegida por vos 🌙"],
+["El puente quebrado","Elegí las losas seguras para cruzar el puente.","Vale por una tarde juntos sin apuro ☁️"],
+["El acertijo lunar","Resolvé el acertijo para activar el portal.","Vale por una carta escrita a mano 💌"],
+["La habitación al revés","Encontrá las tres diferencias entre las escenas.","Vale por un mimo extra 🧸"],
+["El reloj encantado","Detené el reloj en el momento indicado.","Vale por un desayuno especial 🥐"],
+["El mapa perdido","Reconstruí el camino correcto del mapa.","Vale por elegir nuestra canción 🎵"],
+["El jardín de las parejas","Encontrá todas las parejas de cartas iguales.","Vale por una foto juntos 📸"],
+["El alfabeto secreto","Descifrá el mensaje usando la clave del nivel.","Vale por una caminata juntos 🌷"],
+["La balanza misteriosa","Elegí qué objeto equilibra la balanza.","Vale por un postre compartido 🍰"],
+["La secuencia imposible","Completá la secuencia lógica.","Vale por una noche de juegos 🎲"],
+["El laberinto de espejos","Girás los espejos para dirigir la luz al cristal.","Vale por un abrazo sorpresa 🫂"],
+["La caja de música","Repetí la melodía en el orden correcto.","Vale por dedicarte una canción 🎶"],
+["Las huellas invisibles","Seguí las huellas en el orden correcto.","Vale por una salida sorpresa ✨"],
+["El cuarto de las sombras","Descubrí cuál sombra corresponde al objeto.","Vale por una tarde de mimos ☁️"],
+["El tren de engranajes","Poné los engranajes en el orden correcto.","Vale por elegir qué hacemos juntos 🩷"],
+["La biblioteca prohibida","Encontrá el libro que no pertenece a la colección.","Vale por una mini carta de amor 💌"],
+["El guardián del portal","Superá una prueba combinada de memoria y lógica.","Vale por una cita sorpresa 🌹"],
+["El código de las estrellas","Conectá las estrellas en el orden indicado.","Vale por una noche mirando el cielo ✨"],
+["La habitación inundada","Encontrá la salida antes de que se acabe el tiempo.","Vale por un día de plan elegido por vos 💜"],
+["El rompecabezas roto","Armá la imagen para descubrir la palabra final.","Vale por una sorpresa dulce 🍫"],
+["La cerradura triple","Resolvé tres mini acertijos para abrir la puerta.","Vale por una sesión de besitos 😚"],
+["El mensaje invisible","Revelá el mensaje oculto encontrando los símbolos.","Vale por una carta más larga de mi parte 💗"],
+["La torre de cristal","Recordá el camino que se ilumina y repetilo.","Vale por una cita con tu comida favorita 🍕"],
+["El juicio de la luna","Elegí las respuestas correctas a tres enigmas.","Vale por una noche de película y abrazos 🎬"],
+["La última llave","Combiná pistas que encontraste en desafíos anteriores.","Vale por una sorpresa preparada por mí 🎁"],
+["El último portal","Superá el desafío final y abrí el Archivo Secreto.","¡Tu recompensa final: una cita sorpresa y una carta mía! 💜"]
+];
+const layouts = [
+[".......",".###...","...#.#.","#..#...","...##..","....#..","......."],
+[".......","..##...","...#.#.","...#...","##...#..","...#...","......."],
+[".......",".#.....",".#.###.","...#...","##.#.#..","...#...","......."],
+[".......","..###..","....#..",".##....","...#.#..","...#...","......."],
+[".......",".###...","...#...","#..#.#..","...#....","##..#...","......."]
+];
+function loadCompleted(){
+ try{
+  const saved=JSON.parse(localStorage.getItem("30dias_bebe_completed_v2")||"[]");
+  return new Set(Array.isArray(saved)?saved.filter(n=>Number.isInteger(n)&&n>=1&&n<=30):[]);
+ }catch{return new Set();}
+}
+const completed = loadCompleted();
+let currentLevel=1, stageIndex=0, currentChallenge=null, selectedOption=null, stagePassed=false;
+let mazeActive=false, mazeGrid=[], mazePlayer={r:1,c:1}, mazeSize=9;
+const $=id=>document.getElementById(id);
+
+const puzzleBank = [
+ {type:"choice",title:"El código de las luciérnagas",prompt:"Recordá esta secuencia y elegí la que apareció primero:\n\n💜 🌙 ⭐ 💗",options:["💜","🌙","⭐","💗"],answer:"💜"},
+ {type:"input",title:"La palabra desordenada",prompt:"Ordená las letras para formar algo que se siente, pero no se puede tocar:\n\nM O R A",answer:"amor",placeholder:"Escribí la palabra"},
+ {type:"choice",title:"La serie secreta",prompt:"¿Qué símbolo sigue?\n\n🌙 ⭐ 🌙 ⭐ 🌙 …",options:["🌙","⭐","💗","☁️"],answer:"⭐"},
+ {type:"input",title:"El número escondido",prompt:"Si cada corazón vale 2 y cada estrella vale 3, ¿cuánto vale? 💗 + ⭐ + 💗",answer:"7",placeholder:"Tu resultado"},
+ {type:"choice",title:"La puerta diferente",prompt:"Tres símbolos pertenecen a la noche. ¿Cuál no encaja?",options:["🌙","⭐","🦇","☀️"],answer:"☀️"},
+ {type:"input",title:"El mensaje al revés",prompt:"Leé de derecha a izquierda y descubrí la palabra:\n\n💗 R O M A",answer:"amor",placeholder:"Escribí la palabra"},
+ {type:"choice",title:"El patrón lunar",prompt:"Completá el patrón:\n\n🌑 🌒 🌓 🌔 …",options:["🌕","🌑","⭐","🌙"],answer:"🌕"},
+ {type:"input",title:"La cuenta del guardián",prompt:"Tenés 12 estrellas y regalás 5. Después encontrás 3 más. ¿Cuántas tenés?",answer:"10",placeholder:"Número"},
+ {type:"choice",title:"La llave correcta",prompt:"La llave no es la más grande ni la más chica. ¿Cuál elegís?",options:["🔑 pequeña","🗝️ mediana","🔐 enorme","💗 corazón"],answer:"🗝️ mediana"},
+ {type:"input",title:"El alfabeto secreto",prompt:"Cada letra avanzó una posición en el alfabeto. Descifrá: B N P S\n(Pista: retrocedé una letra en cada caso)",answer:"amor",placeholder:"Palabra descifrada"},
+ {type:"choice",title:"La memoria del jardín",prompt:"¿Cuál de estas parejas es exactamente igual?",options:["🌷🌹","💜💜","🌙⭐","💗💕"],answer:"💜💜"},
+ {type:"input",title:"El acertijo del silencio",prompt:"Cuanto más hay, menos podés ver. ¿Qué es?",answer:"oscuridad",placeholder:"Tu respuesta"},
+ {type:"choice",title:"El espejo",prompt:"Si mirás un reloj analógico en un espejo, ¿qué se invierte?",options:["La imagen","El tiempo","La fecha","Nada"],answer:"La imagen"},
+ {type:"input",title:"La secuencia numérica",prompt:"Completá la secuencia: 3, 6, 9, 12, …",answer:"15",placeholder:"Número"},
+ {type:"choice",title:"El jardín de las parejas",prompt:"¿Qué símbolo completa la pareja de corazones?",options:["💗","🌙","☁️","⭐"],answer:"💗"},
+ {type:"input",title:"La clave escondida",prompt:"Tomá la primera letra de cada palabra: Amarte, Mirarte, Oírte, Reír. ¿Qué palabra forman?",answer:"amor",placeholder:"Palabra"},
+ {type:"choice",title:"El intruso",prompt:"¿Cuál no es un color?",options:["Lila","Violeta","Lavanda","Abrazo"],answer:"Abrazo"},
+ {type:"input",title:"La balanza misteriosa",prompt:"Si 💜 = 4 y 💗 = 3, ¿cuánto vale 💜 + 💗 + 💗?",answer:"10",placeholder:"Número"},
+ {type:"choice",title:"El camino correcto",prompt:"Para llegar al norte, ¿hacia dónde apunta una brújula?",options:["Sur","Este","Norte","Oeste"],answer:"Norte"},
+ {type:"input",title:"La palabra escondida",prompt:"Completá: B _ B É. ¿Qué letra falta?",answer:"e",placeholder:"Letra"},
+ {type:"choice",title:"El guardián de las estrellas",prompt:"¿Cuál es el orden de menor a mayor?",options:["🌍 🌙 ⭐","⭐ 🌙 🌍","🌙 🌍 ⭐","🌍 ⭐ 🌙"],answer:"🌍 🌙 ⭐"},
+ {type:"input",title:"La cuenta del portal",prompt:"Hay 4 cajas con 3 cartas en cada una. ¿Cuántas cartas hay?",answer:"12",placeholder:"Número"},
+ {type:"choice",title:"La sombra correcta",prompt:"¿Qué objeto suele dar luz en una habitación?",options:["🕯️","🧸","📚","🪞"],answer:"🕯️"},
+ {type:"input",title:"El código de tres cifras",prompt:"La primera cifra es 2, la segunda el doble de la primera y la tercera la suma de las dos primeras. Escribí las tres cifras juntas.",answer:"246",placeholder:"Código"},
+ {type:"choice",title:"La cerradura triple",prompt:"¿Cuál de estas cosas no se puede regalar en una caja?",options:["Libro","Anillo","Tiempo juntos","Chocolate"],answer:"Tiempo juntos"},
+ {type:"input",title:"El mensaje invisible",prompt:"Quitá los espacios y leé la frase: M I B E B E",answer:"mibebe",placeholder:"Mensaje"},
+ {type:"choice",title:"La torre de cristal",prompt:"¿Qué sigue en la secuencia? 💗 💗💗 💗💗💗 …",options:["💗","💗💗","💗💗💗💗","🌙"],answer:"💗💗💗💗"},
+ {type:"input",title:"El juicio de la luna",prompt:"Si hoy es lunes, ¿qué día será dentro de 3 días?",answer:"jueves",placeholder:"Día"},
+ {type:"choice",title:"La última llave",prompt:"¿Qué palabra une todos los regalos de esta aventura?",options:["Suerte","Amor","Azar","Tiempo"],answer:"Amor"},
+ {type:"input",title:"El último portal",prompt:"Último código: sumá las letras de la palabra LUZ usando A=1, B=2… Z=26.",answer:"59",placeholder:"Número"}
+];
+
+function renderLevels(){
+ const el=$("levels"); el.innerHTML="";
+ for(let n=1;n<=30;n++){
+  const b=document.createElement("button"); b.className="level"+(completed.has(n)?" done":"");
+  b.innerHTML=`<span class="heart">${completed.has(n)?"💖":"♡"}</span><strong>Nivel ${n}</strong><small>${completed.has(n)?"¡Superado!":levelInfo[n-1][0]}</small>`;
+  b.addEventListener("click",()=>openLevel(n)); el.appendChild(b);
+ }
+ $("progress").textContent=`💜 ${completed.size} de 30 completados`;
+ $("finalReward").style.display=completed.size===30?"block":"none";
+}
+function openLevel(n){
+ currentLevel=n; $("modalTitle").textContent=`Nivel ${n}: ${levelInfo[n-1][0]} 💜`; $("password").value=""; $("error").textContent="";
+ $("passwordPane").style.display="block"; $("gamePane").style.display="none"; $("levelReward").style.display="none";
+ $("modalIntro").textContent=completed.has(n)?"Ya superaste este nivel. ¡Podés volver a jugarlo!":`Desafío de hoy: ${levelInfo[n-1][1]} Primero ingresá la contraseña que recibiste.`;
+ $("modal").classList.add("show"); $("password").focus();
+}
+function enterPassword(){
+ const typed=$("password").value.trim();
+ if(typed.toLowerCase()!==passwords[currentLevel-1].toLowerCase()){
+  $("error").textContent="Esa no es la contraseña correcta. ¡Probá otra vez! 💜"; return;
+ }
+ $("error").textContent=""; $("passwordPane").style.display="none"; $("gamePane").style.display="block"; $("levelReward").style.display="none";
+ stageIndex=0; renderMaze();
+}
+function renderMaze(){
+ mazeActive=true;
+ mazeSize=currentLevel<=10?9:(currentLevel<=20?11:13);
+ mazeGrid=Array.from({length:mazeSize},()=>Array(mazeSize).fill(1));
+ const start={r:1,c:1};
+ mazeGrid[start.r][start.c]=0;
+ const stack=[start];
+ while(stack.length){
+  const cur=stack[stack.length-1];
+  const options=[[cur.r-2,cur.c],[cur.r+2,cur.c],[cur.r,cur.c-2],[cur.r,cur.c+2]]
+   .filter(([r,c])=>r>0&&c>0&&r<mazeSize-1&&c<mazeSize-1&&mazeGrid[r][c]===1);
+  if(!options.length){stack.pop();continue;}
+  const [nr,nc]=options[Math.floor(Math.random()*options.length)];
+  mazeGrid[(cur.r+nr)/2][(cur.c+nc)/2]=0;
+  mazeGrid[nr][nc]=0;
+  stack.push({r:nr,c:nc});
+ }
+ mazePlayer={r:1,c:1};
+ const exit={r:mazeSize-2,c:mazeSize-2};
+ mazeGrid[exit.r][exit.c]=0;
+ $("stageLabel").textContent="LABERINTO · ENCONTRÁ LA SALIDA";
+ $("stageDots").textContent="🧍 ➜ 🚪";
+ $("challengeTitle").textContent=currentLevel<=10?"El caminito de las nubes ☁️":currentLevel<=20?"El laberinto encantado ✨":"El laberinto de la luna 🌙";
+ $("challengePrompt").textContent="Mové al personaje por los pasillos violetas hasta la puerta verde. ¡Después te esperan tres acertijos!";
+ $("challengeFeedback").textContent="";
+ $("challengeSubmit").style.display="none";
+ renderMazeBoard();
+}
+function renderMazeBoard(){
+ const body=$("challengeBody");
+ let html=`<div class="maze" id="mazeBoard" style="grid-template-columns:repeat(${mazeSize},minmax(0,1fr))" aria-label="Laberinto">`;
+ for(let r=0;r<mazeSize;r++){
+  for(let c=0;c<mazeSize;c++){
+   const isPlayer=mazePlayer.r===r&&mazePlayer.c===c;
+   const isExit=r===mazeSize-2&&c===mazeSize-2;
+   const wall=mazeGrid[r][c]===1;
+   let cls="cell"+(wall?" wall":" path")+(isPlayer?" player":"")+(isExit?" exit":"");
+   let symbol=isPlayer?"🧍":(isExit?"🚪":"");
+   html+=`<div class="${cls}" aria-label="${isPlayer?"Personaje":isExit?"Salida":wall?"Pared":"Camino"}">${symbol}</div>`;
+  }
+ }
+ html+="</div><p class=\"maze-help\">PC: flechas o WASD · Celular: usá los botones</p>";
+ html+='<div class="controls"><button class="empty" tabindex="-1" aria-hidden="true">·</button><button data-move="up" aria-label="Arriba">▲</button><button class="empty" tabindex="-1" aria-hidden="true">·</button><button data-move="left" aria-label="Izquierda">◀</button><button data-move="down" aria-label="Abajo">▼</button><button data-move="right" aria-label="Derecha">▶</button></div>';
+ body.innerHTML=html;
+ $("challengeSubmit").style.display="none";
+}
+function move(direction){
+ if(!mazeActive)return;
+ const delta={up:[-1,0],down:[1,0],left:[0,-1],right:[0,1]}[direction];
+ if(!delta)return;
+ const nr=mazePlayer.r+delta[0], nc=mazePlayer.c+delta[1];
+ if(nr<0||nc<0||nr>=mazeSize||nc>=mazeSize||mazeGrid[nr][nc]===1){
+  $("challengeFeedback").textContent="¡Esa es una pared! Buscá otro camino 💜";
+  return;
+ }
+ mazePlayer={r:nr,c:nc};
+ $("challengeFeedback").textContent="";
+ if(nr===mazeSize-2&&nc===mazeSize-2){
+  mazeActive=false;
+  $("stageLabel").textContent="¡LABERINTO COMPLETADO!";
+  $("stageDots").textContent="💜 💜 💜";
+  $("challengeTitle").textContent="¡Encontraste la salida! 🌸";
+  $("challengePrompt").textContent="¡Bien hecho, bebé! Ahora vienen los tres acertijos de este día.";
+  $("challengeBody").innerHTML='<div style="font-size:2.8rem;text-align:center;padding:16px">🧍‍♀️ 💜 🚪</div><button class="btn" id="startRiddles" type="button">Ir a los acertijos ✨</button>';
+  $("startRiddles").addEventListener("click",()=>{stageIndex=0;renderChallenge();});
+  return;
+ }
+ renderMazeBoard();
+}
+
+function renderChallenge(){
+ mazeActive=false;
+ const puzzleIndex=(currentLevel-1 + stageIndex*10) % puzzleBank.length;
+ const base=puzzleBank[puzzleIndex];
+ currentChallenge={...base};
+ // Difficulty increases with each group of five levels: later levels require a stricter answer.
+ $("stageLabel").textContent=`ACERTIJO ${stageIndex+1} DE 3`;
+ $("stageDots").textContent="💜 ".repeat(stageIndex)+"♡ ".repeat(2-stageIndex);
+ $("challengeTitle").textContent=stageIndex===0?base.title:`${base.title} · Fase ${stageIndex+1}`;
+ let prompt=base.prompt;
+ if(stageIndex===1) prompt+="\n\nSEGUNDA FASE: resolvé el mismo tipo de reto sin apurarte.";
+ if(stageIndex===2) prompt+="\n\nFASE FINAL: esta es la última cerradura.";
+ $("challengePrompt").textContent=prompt;
+ const body=$("challengeBody");body.innerHTML="";selectedOption=null;
+ if(base.type==="choice"){
+  const opts=base.options.slice();
+  // Change the order on each attempt so the answer isn't always in the same place.
+  opts.sort(()=>Math.random()-.5);
+  const wrap=document.createElement("div");wrap.className="challenge-options";
+  opts.forEach(opt=>{const b=document.createElement("button");b.className="challenge-option";b.textContent=opt;b.onclick=()=>{selectedOption=opt;wrap.querySelectorAll("button").forEach(x=>x.classList.toggle("selected",x===b));};wrap.appendChild(b);});
+  body.appendChild(wrap);
+ }else{
+  const input=document.createElement("input");input.className="challenge-input";input.id="answerInput";input.placeholder=base.placeholder||"Escribí tu respuesta";input.autocomplete="off";
+  input.addEventListener("keydown",e=>{if(e.key==="Enter")checkChallenge();});body.appendChild(input);
+ }
+ $("challengeFeedback").textContent="";
+ $("challengeSubmit").style.display="inline-block";
+ $("challengeSubmit").textContent=stageIndex===2?"Abrir la puerta 💜":"Comprobar respuesta";
+ $("challengeSubmit").onclick=checkChallenge;
+}
+function normalizeAnswer(s){return String(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]/g,"").trim();}
+function checkChallenge(){
+ const answer=currentChallenge.type==="choice"?selectedOption:$("answerInput")?.value;
+ if(!answer){$("challengeFeedback").textContent="Elegí o escribí una respuesta para continuar.";return;}
+ if(normalizeAnswer(answer)!==normalizeAnswer(currentChallenge.answer)){
+  $("challengeFeedback").textContent="La cerradura no se abrió. Volvé a intentarlo 💜";return;
+ }
+ stageIndex++;
+ if(stageIndex<3){renderChallenge();return;}
+ winLevel();
+}
+function winLevel(){
+ completed.add(currentLevel);try{localStorage.setItem("30dias_bebe_completed_v2",JSON.stringify([...completed]));}catch{}renderLevels();
+ $("gamePane").style.display="none";$("levelReward").style.display="block";
+ $("rewardTitle").textContent=`¡Sello ${String(currentLevel).padStart(2,"0")} conseguido! ✨`;
+ $("rewardText").textContent=levelInfo[currentLevel-1][2];
+ if(currentLevel===30)$("rewardText").textContent="Conseguiste el último sello. Se abrió el acceso al Archivo Secreto de Nosotros…";
+}
+$("enter").addEventListener("click",enterPassword);
+$("password").addEventListener("keydown",e=>{if(e.key==="Enter")enterPassword()});
+$("close").addEventListener("click",()=>{mazeActive=false;$("modal").classList.remove("show");});
+$("backToLevels").addEventListener("click",()=>{mazeActive=false;$("modal").classList.remove("show");});
+$("openFinalVault").addEventListener("click",()=>{
+ $("finalVaultPuzzle").style.display="block";
+ $("finalAnswer").focus();
+});
+function solveFinalVault(){
+ const answer=normalizeAnswer($("finalAnswer").value);
+ if(["amor","elamor","amorverdadero"].includes(answer)){
+  $("finalError").textContent="";
+  $("finalVaultPrize").style.display="block";
+  $("finalVaultPuzzle").style.display="none";
+  try{localStorage.setItem("30dias_bebe_final_unlocked","yes");}catch{}
+ }else{
+  $("finalError").textContent="Las estrellas todavía no se alinean… intentá de nuevo 💜";
+ }
+}
+$("checkFinalAnswer").addEventListener("click",solveFinalVault);
+$("finalAnswer").addEventListener("keydown",e=>{if(e.key==="Enter")solveFinalVault()});
+document.addEventListener("click",e=>{const button=e.target.closest("[data-move]");if(button)move(button.dataset.move);});
+document.addEventListener("keydown",e=>{
+ const key=e.key.toLowerCase();
+ const map={arrowup:"up",w:"up",arrowdown:"down",s:"down",arrowleft:"left",a:"left",arrowright:"right",d:"right"};
+ if(mazeActive&&map[key]&&!/INPUT|TEXTAREA/.test(document.activeElement.tagName)) {e.preventDefault();move(map[key]);}
+});
+renderLevels();
+</script>
+</body>
+</html>
